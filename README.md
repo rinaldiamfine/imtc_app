@@ -1,1 +1,1 @@
-# imtc_module
+# IMTC (Training Management System)
