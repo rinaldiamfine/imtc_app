@@ -26,7 +26,12 @@
         'website'
     ],
     'data': [
+        'views/res_partner_view.xml',
+        'views/crm_view.xml',
         'views/student_view.xml',
+        'views/student_attendance_view.xml',
+        'views/student_class_view.xml',
+        'views/student_session_view.xml',
         'views/menuitem_view.xml',
         "security/ir.model.access.csv"
     ],

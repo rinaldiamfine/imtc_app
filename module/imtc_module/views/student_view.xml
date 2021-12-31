@@ -13,18 +13,33 @@
                             <field name="name"/>
                         </h1>
                         <field name="active" invisible="1"/>
-                        <field name="id_number"/>
-                        <field name="email"/>
-                        <field name="phone"/>
-                        <field name="is_membership"/>
                     </div>
                     <group>
-                        
+                        <field name="is_membership"/>
                     </group>
                     <notebook>
                         <page string="Info" name="studentn_info">
-                            <separator string="Address"/>
-
+                            <group>
+                                <group>
+                                    <label for="street" string="Address"/>
+                                    <div class="o_address_format">
+                                        <field name="street" placeholder="Street..." class="o_address_street"/>
+                                        <field name="street2" placeholder="Street 2..." class="o_address_street"/>
+                                        <field name="city" placeholder="City" class="o_address_city"/>
+                                        <field name="state_id" class="o_address_state" placeholder="State" options="{&quot;no_open&quot;: True}"/>
+                                        <field name="zip" placeholder="ZIP" class="o_address_zip"/>
+                                        <field name="country_id" placeholder="Country" class="o_address_country" options="{&quot;no_open&quot;: True}"/>
+                                    </div>
+                                </group>
+                                <group>
+                                    <field name="id_number"/>
+                                    <field name="email"/>
+                                    <field name="phone"/>
+                                </group>
+                            </group>  
+                        </page>
+                        <page string="Class" name="student_class">
+                            <field name="student_class_ids"/>
                         </page>
                         <page string="Payment" name="student_payment">
                             <group>
