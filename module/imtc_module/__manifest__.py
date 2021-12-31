@@ -15,11 +15,19 @@
     'installable': True,
     'license': 'LGPL-3',
 
-    'depends': ['base'],
+    'depends': [
+        'base',
+        'crm',
+        'sale_crm',
+        'sale',
+        'purchase',
+        'account',
+        'l10n_id',
+        'website'
+    ],
     'data': [
-        # 'security/user_groups.xml',
-        # 'security/ir.model.access.csv',
-        # 'views/backup_view.xml',
-        # 'data/backup_data.xml',
+        'views/student_view.xml',
+        'views/menuitem_view.xml',
+        "security/ir.model.access.csv"
     ],
 }

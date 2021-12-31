@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_student_student_form_view" model="ir.ui.view">
+        <field name="name">Student Trainee</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name"/>
+                        </h1>
+                        <field name="active" invisible="1"/>
+                        <field name="id_number"/>
+                        <field name="email"/>
+                        <field name="phone"/>
+                        <field name="is_membership"/>
+                    </div>
+                    <group>
+                        
+                    </group>
+                    <notebook>
+                        <page string="Info" name="studentn_info">
+                            <separator string="Address"/>
+
+                        </page>
+                        <page string="Payment" name="student_payment">
+                            <group>
+                                <group>
+                                
+                                </group>
+                                <group>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+    
+    <record id="view_student_student_tree_view" model="ir.ui.view">
+        <field name="name">Student Trainee</field>
+        <field name="model">student.student</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="id_number" string="Identity Number"/>
+                <field name="name" string="Name"/>
+                <field name="is_membership"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="action_student_student" model="ir.actions.act_window">
+        <field name="name">Student Trainee</field>
+        <field name="res_model">student.student</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('active','=',True)]</field>
+    </record>
+    
+</odoo>
