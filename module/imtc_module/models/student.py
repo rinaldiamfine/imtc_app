@@ -6,7 +6,7 @@ class Student(models.Model):
     _name = 'student.student'
     _description = "Student"
 
-    id_number = fields.Integer(String="Identity No.", required=True)
+    id_number = fields.Char(String="Identity No.", required=True)
     name = fields.Char(string='Name')
     photo = fields.Binary(string='Photo')
     email = fields.Char(string='Email')

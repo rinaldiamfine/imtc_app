@@ -11,11 +11,26 @@ class ResPartner(models.Model):
 
     @api.model
     def create(self, values):
-        res = super(ResPartner, self).create(values)
         student_obj = self.env['student.student']
-        student_values = {
-            'name': values['name'],
-        }
+        crm_obj = self.env['crm.lead']
+        context = self._context
+        id_number = ""
+        student_id = False
+        if not values.get('id_number'):
+            if context.get('active_model') == 'crm.lead':
+                active_id = context.get('active_id')
+                crm_id = crm_obj.browse(active_id)
+                id_number = crm_id.id_number if crm_id else ""
+        else:
+            id_number = values['id_number']
+        if id_number != "":
+            student_values = {
+                'name': values['name'],
+                'id_number': id_number
+            }
+            student_id = student_obj.create(student_values)
+        values['student_id'] = student_id.id if student_id else False
+        res = super(ResPartner, self).create(values)
         return res
 
     # _sql_constraints = [
