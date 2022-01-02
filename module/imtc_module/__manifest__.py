@@ -33,6 +33,8 @@
         'views/student_class_view.xml',
         'views/student_session_view.xml',
         'views/menuitem_view.xml',
+        'website/base.xml',
+        'website/registration_view.xml',
         "security/ir.model.access.csv"
     ],
 }
