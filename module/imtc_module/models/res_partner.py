@@ -12,33 +12,36 @@ class ResPartner(models.Model):
     @api.model
     def create(self, values):
         student_obj = self.env['student.student']
-        crm_obj = self.env['crm.lead']
         context = self._context
-        id_number = ""
-        student_id = False
-        if not values.get('id_number'):
-            if context.get('active_model') == 'crm.lead':
-                active_id = context.get('active_id')
-                crm_id = crm_obj.browse(active_id)
-                id_number = crm_id.id_number if crm_id else ""
+        student_values = {}
+        if context.get('active_model') == 'crm.lead':
+            student_values = self.setup_student_values(values, context)
         else:
-            id_number = values['id_number']
-        if id_number != "":
-            student_values = {
-                'name': values['name'],
-                'id_number': id_number
-            }
-            student_id = student_obj.create(student_values)
+            student_values = self.setup_student_values(values, context)
+        student_id = student_obj.create(student_values)
         values['student_id'] = student_id.id if student_id else False
         res = super(ResPartner, self).create(values)
         return res
+    
+    def setup_student_values(self, values, context):
+        values = {}
+        if values.get('id_number'):
+            values['id_number'] = values['id_number']
+            values['name'] = values['name']
+            values['street'] = values['street']
+            values['street2'] = values['street2']
+            values['city'] = values['city']
+            values['state_id'] = values['state_id']
+            values['zip'] = values['zip']
+            values['country_id'] = values['country_id']
+            values['email'] = values['email'] if values.get('email') else values['email_from']
+            values['phone'] = values['phone']
 
-    # _sql_constraints = [
-    #     (
-    #         "id_number_uniq",
-    #         "unique(id_number)",
-    #         (
-    #             "A partner with the same identity number has been created before!"
-    #         ),
-    #     )
-    # ]
+        else:
+            active_id = context.get('active_id')
+            crm_obj = self.env['crm.lead']
+            crm_id = crm_obj.browse(active_id)
+            values['id_number'] = crm_id.id_number if crm_id else ""
+            values['name'] = crm_id.contact_name
+            # ... SKIP FOR NOW
+        return values
