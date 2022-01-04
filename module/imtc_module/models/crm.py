@@ -9,6 +9,19 @@ class CrmLead(models.Model):
     id_number = fields.Char(string="Identity No.")
     product_id = fields.Many2one('product.product', string="Training Program")
 
+    def action_new_quotation(self):
+        res = super(CrmLead, self).action_new_quotation()
+        product_values = {
+            'product_id': self.product_id.id,
+            'product_uom': self.product_id.product_tmpl_id.id,
+            'name': self.product_id.name,
+            'product_uom_qty': 1,
+            'price_unit': self.product_id.lst_price,
+            'tax_id': [(6,0,self.product_id.taxes_id.ids)] if self.product_id.taxes_id else []
+        }
+        res['context']['default_order_line'] = [(0, 0, product_values)]
+        return res
+
     def _create_lead_partner_data(self, name, is_company, parent_id=False):
         """ extract data from lead to create a partner
             :param name : furtur name of the partner
