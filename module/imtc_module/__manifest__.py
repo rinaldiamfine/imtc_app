@@ -35,6 +35,10 @@
         'views/menuitem_view.xml',
         'website/base.xml',
         'website/registration_view.xml',
+
+        'report/report_bukti_pembayaran.xml',
+        'report/report_bukti_penerimaan.xml',
+        
         "security/ir.model.access.csv"
     ],
 }
